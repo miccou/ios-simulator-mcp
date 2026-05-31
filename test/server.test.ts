@@ -241,3 +241,50 @@ test("an unknown device name yields an error result, not a crash", async () => {
     /No simulator found matching/,
   );
 });
+
+// ── runtime input validation ────────────────────────────────────────────────
+
+test("a missing required argument is rejected before the command runs", async () => {
+  const { client, calls } = await connect();
+  const res = await client.callTool({ name: "open_url", arguments: {} });
+
+  assert.equal(res.isError, true);
+  assert.match((res.content as [{ text: string }])[0].text, /validation/i);
+  assert.equal(calls.length, 0); // nothing was ever shelled out
+});
+
+test("a wrong-typed argument is rejected instead of becoming 'undefined'", async () => {
+  const { client, calls } = await connect();
+  const res = await client.callTool({
+    name: "tap",
+    arguments: { x: "not-a-number", y: 99 },
+  });
+
+  assert.equal(res.isError, true);
+  assert.match((res.content as [{ text: string }])[0].text, /validation/i);
+  assert.equal(calls.length, 0);
+});
+
+test("an out-of-range value is rejected by the schema", async () => {
+  const { client, calls } = await connect();
+  const res = await client.callTool({
+    name: "set_status_bar",
+    arguments: { wifiBars: 9 },
+  });
+
+  assert.equal(res.isError, true);
+  assert.match((res.content as [{ text: string }])[0].text, /validation/i);
+  assert.equal(calls.length, 0);
+});
+
+test("an invalid enum value is rejected by the schema", async () => {
+  const { client, calls } = await connect();
+  const res = await client.callTool({
+    name: "set_appearance",
+    arguments: { mode: "sepia" },
+  });
+
+  assert.equal(res.isError, true);
+  assert.match((res.content as [{ text: string }])[0].text, /validation/i);
+  assert.equal(calls.length, 0);
+});

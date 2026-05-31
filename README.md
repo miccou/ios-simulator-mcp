@@ -149,6 +149,7 @@ npm install
 npm run build      # compile TypeScript → dist/
 npm run dev        # watch mode
 npm run typecheck  # type-check without emitting
+npm test           # run the test suite (no simulator required)
 ```
 
 Point your MCP client at your local checkout while developing:
@@ -184,7 +185,13 @@ npx @modelcontextprotocol/inspector node dist/index.js
 
 ## Contributing
 
-Issues and PRs welcome. Please run `npm run typecheck` before opening a PR.
+Issues and PRs welcome. Please run `npm run typecheck` and `npm test` before
+opening a PR — both run automatically in CI on every push and pull request.
+
+The test suite mocks the `xcrun` boundary, so it runs anywhere (including Linux
+CI) without a real simulator: unit tests cover device resolution and argument
+building in `src/simctl.ts`, and integration tests drive the MCP server over an
+in-memory transport to assert the exact commands each tool issues.
 
 ## License
 

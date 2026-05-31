@@ -143,8 +143,8 @@ status-bar values can't trigger shell injection.
 ## Local development
 
 ```bash
-git clone https://github.com/miccou/ios-simulator-mcp.git
-cd ios-simulator-mcp
+git clone https://github.com/miccou/simulator-mcp.git
+cd simulator-mcp
 npm install
 npm run build      # compile TypeScript → dist/
 npm run dev        # watch mode

@@ -97,7 +97,7 @@ test("resolveDevice throws on an unknown name", () => {
 test("buildStatusBarArgs builds a clear command", () => {
   assert.deepEqual(buildStatusBarArgs("booted", { clear: true }), [
     "simctl",
-    "statusbar",
+    "status_bar",
     "booted",
     "clear",
   ]);
@@ -108,7 +108,7 @@ test("buildStatusBarArgs emits only the provided override flags", () => {
     buildStatusBarArgs("booted", { time: "9:41", batteryState: "charged" }),
     [
       "simctl",
-      "statusbar",
+      "status_bar",
       "booted",
       "override",
       "--time",
@@ -124,20 +124,20 @@ test("buildStatusBarArgs still emits numeric zero values", () => {
     buildStatusBarArgs("booted", { batteryLevel: 0, wifiBars: 0, cellBars: 0 }),
     [
       "simctl",
-      "statusbar",
+      "status_bar",
       "booted",
       "override",
       "--batteryLevel",
       "0",
       "--wifiBars",
       "0",
-      "--cellBars",
+      "--cellularBars",
       "0",
     ],
   );
 });
 
-test("buildStatusBarArgs builds a full override", () => {
+test("buildStatusBarArgs builds a full override with simctl's real flag names", () => {
   assert.deepEqual(
     buildStatusBarArgs("booted", {
       time: "9:41",
@@ -150,7 +150,7 @@ test("buildStatusBarArgs builds a full override", () => {
     }),
     [
       "simctl",
-      "statusbar",
+      "status_bar",
       "booted",
       "override",
       "--time",
@@ -163,9 +163,9 @@ test("buildStatusBarArgs builds a full override", () => {
       "active",
       "--wifiBars",
       "3",
-      "--cellMode",
+      "--cellularMode",
       "active",
-      "--cellBars",
+      "--cellularBars",
       "4",
     ],
   );

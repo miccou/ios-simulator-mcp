@@ -99,9 +99,9 @@ export function buildStatusBarArgs(
   device: string,
   opts: StatusBarOptions,
 ): string[] {
-  if (opts.clear) return ["simctl", "statusbar", device, "clear"];
+  if (opts.clear) return ["simctl", "status_bar", device, "clear"];
 
-  const args = ["simctl", "statusbar", device, "override"];
+  const args = ["simctl", "status_bar", device, "override"];
   if (opts.time !== undefined) args.push("--time", opts.time);
   if (opts.batteryLevel !== undefined)
     args.push("--batteryLevel", String(opts.batteryLevel));
@@ -110,9 +110,9 @@ export function buildStatusBarArgs(
   if (opts.wifiMode !== undefined) args.push("--wifiMode", opts.wifiMode);
   if (opts.wifiBars !== undefined)
     args.push("--wifiBars", String(opts.wifiBars));
-  if (opts.cellMode !== undefined) args.push("--cellMode", opts.cellMode);
+  if (opts.cellMode !== undefined) args.push("--cellularMode", opts.cellMode);
   if (opts.cellBars !== undefined)
-    args.push("--cellBars", String(opts.cellBars));
+    args.push("--cellularBars", String(opts.cellBars));
   return args;
 }
 

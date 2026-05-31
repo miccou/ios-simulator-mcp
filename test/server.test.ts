@@ -176,7 +176,7 @@ test("set_status_bar override vs clear produce different messages", async () => 
   assert.match((override.content as [{ text: string }])[0].text, /updated/);
   assert.deepEqual(calls[0], [
     "simctl",
-    "statusbar",
+    "status_bar",
     "booted",
     "override",
     "--time",
@@ -188,7 +188,7 @@ test("set_status_bar override vs clear produce different messages", async () => 
     arguments: { clear: true },
   });
   assert.match((cleared.content as [{ text: string }])[0].text, /cleared/);
-  assert.deepEqual(calls[1], ["simctl", "statusbar", "booted", "clear"]);
+  assert.deepEqual(calls[1], ["simctl", "status_bar", "booted", "clear"]);
 });
 
 // ── list_devices ─────────────────────────────────────────────────────────────

@@ -15,13 +15,13 @@
     "screenshot",
     "automation"
   ],
-  "homepage": "https://github.com/miccou/ios-simulator-mcp#readme",
+  "homepage": "https://github.com/miccou/simulator-mcp#readme",
   "bugs": {
-    "url": "https://github.com/miccou/ios-simulator-mcp/issues"
+    "url": "https://github.com/miccou/simulator-mcp/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/miccou/ios-simulator-mcp.git"
+    "url": "git+https://github.com/miccou/simulator-mcp.git"
   },
   "license": "MIT",
   "author": "Michael Cousins",

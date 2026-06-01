@@ -11,6 +11,7 @@ import {
   buildStatusBarArgs,
   formatDeviceList,
   resolveDevice,
+  withDebugLogging,
   xcrun,
   type Runner,
 } from "./simctl.js";
@@ -52,7 +53,7 @@ const deviceArg = {
  * runner (and Simulator-app opener) in tests; the defaults shell out for real.
  */
 export function createServer(deps: ServerDeps = {}): McpServer {
-  const run = deps.run ?? xcrun;
+  const run = withDebugLogging(deps.run ?? xcrun);
   const openApp =
     deps.openApp ??
     (async () => {
